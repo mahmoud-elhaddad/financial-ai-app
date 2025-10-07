@@ -1,0 +1,106 @@
+<div class="settings-container">
+  <div class="row">
+    <div class="col-12">
+      <app-breadcrumbs (onClickEvent)="onBreadcrumbClicked($event)" [breadcrumbs]="breadcrumbItems"
+        [size]="breadcrumbSizeEnum.Medium" divider=">"></app-breadcrumbs>
+    </div>
+    <div class="col-12">
+      <h2 class="main_head">{{ 'SIDEMENU.USERS_LIST' | translate }}</h2>
+    </div>
+  </div>
+
+  <div class="row mb-3">
+    <!-- Mobile Number -->
+    <div class="col-lg-3 mt_32">
+      <div class="form-group">
+        <label for="">
+          {{ 'USERS_LIST.MOBILE_NUM' | translate }}
+        </label>
+        <input type="text" class="form-control form-select-input" maxlength="150" inputmode="numeric"
+          [(ngModel)]="filter.mobileNumber" name="mobileNumber" [placeholder]="'USERS_LIST.MOBILE_NUM' | translate" />
+      </div>
+    </div>
+
+    <!-- Name -->
+    <div class="col-lg-3 mt_32">
+      <div class="form-group">
+        <label for="">
+          {{ 'USERS_LIST.NAME' | translate }}
+        </label>
+        <input type="text" class="form-control form-select-input" maxlength="150" [(ngModel)]="filter.name" name="name"
+          [placeholder]="'USERS_LIST.NAME' | translate" />
+      </div>
+    </div>
+
+    <!-- Date Range -->
+    <div class="col-lg-3 mt_32">
+      <div class="form-group">
+        <label for="">
+          {{ 'USERS_LIST.DATE' | translate }}
+        </label>
+
+        <mat-form-field>
+          <mat-date-range-input [rangePicker]="picker">
+            <input matStartDate placeholder="{{ 'SEARCH.FROM_DATE' | translate }}" [(ngModel)]="filter.startDate"
+              name="startDate" />
+            <input matEndDate placeholder="{{ 'SEARCH.TO_DATE' | translate }}" [(ngModel)]="filter.endDate"
+              name="endDate" />
+          </mat-date-range-input>
+          <mat-datepicker-toggle matIconSuffix [for]="picker">
+            <mat-icon matDatepickerToggleIcon>
+              <img src="assets/images/calendar.svg" />
+            </mat-icon>
+          </mat-datepicker-toggle>
+          <mat-date-range-picker #picker></mat-date-range-picker>
+        </mat-form-field>
+      </div>
+    </div>
+
+    <!-- Status -->
+    <!-- Uncomment when API supports it -->
+    <!--
+    <div class="col-lg-3 mt_32">
+      <div class="form-group">
+        <label for="">
+          {{ 'USERS_LIST.STATUS' | translate }}
+        </label>
+        <mat-select
+          class="form-select-input"
+          [placeholder]="'USERS_LIST.STATUS' | translate"
+          [(ngModel)]="filter.status"
+          name="status"
+        >
+          <mat-option [value]="0">{{ 'USERS_LIST.ACTIVE' | translate }}</mat-option>
+          <mat-option [value]="1">{{ 'USERS_LIST.SUSPENDED' | translate }}</mat-option>
+        </mat-select>
+      </div>
+    </div>
+    -->
+
+    <!-- Actions -->
+    <div class="col-12 d-flex justify-content-end">
+      <button class="main_btn" (click)="applayFilter()">
+        {{ 'FORM.FILLTER' | translate }}
+      </button>
+      <button class="main_btn main_btn--gray" (click)="resetFilter()">
+        {{ 'FORM.RESET' | translate }}
+      </button>
+    </div>
+  </div>
+
+  <!-- Refresh + Table -->
+  <div class="row pt-3 topLine">
+   
+    <div class="col-12">
+      <div  class="d-flex justify-content-end mb-2">
+           <button class=" border-0 refreshBtn p-0 m-0" (click)="getUsersDataList()">
+        <i class="fa-solid fa-arrows-rotate"></i>
+      </button>
+      </div>
+      <app-shared-table [dataSource]="dataSource" [columnConfigs]="columnConfigs" [collectionSize]="collectionSize"
+        [pageSize]="filter.limit" (pageChanged)="onPageChange($event)" [noDataMessage]="noDataMessage"
+        (actionClicked)="handleAction($event)">
+      </app-shared-table>
+    </div>
+  </div>
+</div>

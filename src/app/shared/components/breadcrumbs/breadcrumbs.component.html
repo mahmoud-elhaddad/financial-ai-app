@@ -1,0 +1,19 @@
+<div class="breadcrumb-container" [ngClass]="getBreadcrumbSize()">
+    <ng-container *ngFor="let item of breadcrumbs; let last = last">
+      <!-- Normal breadcrumb item -->
+      <ng-container *ngIf="!item.disabled && !item.isOverflowed">
+        <a class="breadcrumb-item" (click)="onBreadcrumbClick(item)">{{ item.label }}</a>
+      </ng-container>
+  
+      <!-- Disabled breadcrumb item -->
+      <ng-container *ngIf="item.disabled">
+        <a class="breadcrumb-item disabled">{{ item.label }}</a>
+      </ng-container>
+  
+      <!-- Divider between breadcrumb items -->
+      <ng-container *ngIf="!last">
+        <span class="breadcrumb-divider">{{ divider }}</span>
+      </ng-container>
+    </ng-container>
+  </div>
+  

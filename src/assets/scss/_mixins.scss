@@ -1,0 +1,124 @@
+$prefixes: (
+	"-webkit-",
+	"-moz-",
+	"-ms-",
+	"-o-",
+	""
+);
+$breakpoints: (
+	xs_mobile: 360px,
+	mobile: 576px,
+	tablet: 768px,
+	desktop: 992px,
+    tablet_rotate: 1025,
+	l_desktop: 1280px,
+	xl_desktop: 1360px
+);
+
+// Media Query
+@mixin mediaquery($direction, $breakpoint) {
+	$breakpoint_value: map-get($breakpoints, $breakpoint);
+
+	@if $direction ==max {
+		@media (max-width: ($breakpoint_value - 1)) {
+			@content;
+		}
+	}
+
+	@if $direction ==min {
+		@media (min-width: ($breakpoint_value)) {
+			@content;
+		}
+	}
+}
+
+// Transform Mixin
+@mixin transform($translate, $rotate: false, $scale: false) {
+	@each $prefix in $prefixes {
+		#{$prefix}transform: $translate;
+
+		@if $rotate {
+			#{$prefix}transform: $rotate;
+		}
+
+		@if $scale {
+			#{$prefix}transform: $scale;
+		}
+	}
+}
+
+// Transition Mixin
+@mixin transition($args...) {
+	@each $prefix in $prefixes {
+		#{$prefix}transition: $args;
+	}
+}
+
+// Border Raduis  Mixin
+@mixin border_radius($radius_value) {
+	@each $prefix in ("-webkit-", "-moz-", "") {
+		#{$prefix}border-radius: $radius_value;
+	}
+}
+
+// Box Shadow Mixin
+@mixin box_shadow($x, $y, $blur, $spd, $color) {
+	@each $prefix in $prefixes {
+		#{$prefix}box-shadow: $x $y $blur $spd $color;
+	}
+}
+
+// No Box Shadow Mixin
+@mixin box_no_shadow {
+	@each $prefix in $prefixes {
+		#{$prefix}box-shadow: none !important;
+	}
+}
+
+// margin - padding  
+$space-list: 0 4 8 12 16 24 32 48;
+@each $space in $space-list {
+	.pb_#{$space} {
+        padding-bottom: $space+px;
+    }
+	.pt_#{$space} {
+        padding-top: $space+px;
+    }
+	.pst_#{$space} {
+        padding-inline-start: $space+px;
+    }
+	.pe_#{$space} {
+        padding-inline-end: $space+px;
+    }
+	.p_#{$space} {
+        padding: $space+px;
+    }
+	.mt_#{$space} {
+		margin-top:  $space+px;;
+	}
+	.mb_#{$space} {
+		margin-bottom:  $space+px;;
+	}
+	.ms_#{$space} {
+		margin-inline-start:  $space+px;;
+	}
+	.me_#{$space} {
+		margin-inline-end:  $space+px;;
+	}
+}
+
+// Font Size
+$font-size-list: 10 12 14 16 18 20 24 34 36 40 48 60;
+@each $value in $font-size-list {
+	.fs-#{$value} {
+		font-size: $value+px;
+	}
+}
+
+// Font Weight
+$font-weight-list:500 600 bold;
+@each $value in $font-weight-list {
+	.fw-#{$value} {
+		font-weight: $value !important;
+	}
+}

@@ -1,0 +1,189 @@
+
+<!-- Dashboard Header -->
+<div class="dashboard-header">
+  <div class="d-flex justify-content-between align-items-center mb-4">
+    <div>
+      <h2 class="dashboard-title">{{ 'DASHBOARD.TITLE' | translate }}</h2>
+      <p class="dashboard-subtitle">{{ 'DASHBOARD.SUBTITLE' | translate }}</p>
+    </div>
+    <button class="btn btn-primary" (click)="refreshDashboard()" [disabled]="isLoading">
+      <i class="fas fa-sync-alt me-2"></i>
+      {{ 'DASHBOARD.REFRESH_DATA' | translate }}
+    </button>
+  </div>
+</div>
+
+<!-- Loading Spinner -->
+<div *ngIf="isLoading" class="loading-container">
+  <div class="spinner-border text-primary" role="status">
+    <span class="visually-hidden">Loading...</span>
+  </div>
+  <p class="mt-2">{{ 'DASHBOARD.LOADING' | translate }}</p>
+</div>
+
+<!-- Dashboard Content -->
+<div *ngIf="!isLoading" class="dashboard-content">
+  
+  <!-- Statistics Cards -->
+  <div class="row mb-4">
+    <div class="col-lg-3 col-md-6 mb-3">
+      <div class="card stat-card revenue-card h-100">
+        <div class="card-body">
+          <div class="d-flex align-items-center">
+            <div class="stat-icon me-3">
+              <i class="fas fa-dollar-sign"></i>
+            </div>
+            <div class="stat-content flex-grow-1">
+              <h3 class="stat-value">{{ formatCurrency(dashboardStats.totalRevenue) }}</h3>
+              <p class="stat-label">{{ 'DASHBOARD.TOTAL_REVENUE' | translate }}</p>
+              <span class="badge bg-success">+12.5%</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    
+    <div class="col-lg-3 col-md-6 mb-3">
+      <div class="card stat-card users-card h-100">
+        <div class="card-body">
+          <div class="d-flex align-items-center">
+            <div class="stat-icon me-3">
+              <i class="fas fa-users"></i>
+            </div>
+            <div class="stat-content flex-grow-1">
+              <h3 class="stat-value">{{ formatNumber(dashboardStats.totalUsers) }}</h3>
+              <p class="stat-label">{{ 'DASHBOARD.TOTAL_USERS' | translate }}</p>
+              <span class="badge bg-success">+8.2%</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    
+    <div class="col-lg-3 col-md-6 mb-3">
+      <div class="card stat-card orders-card h-100">
+        <div class="card-body">
+          <div class="d-flex align-items-center">
+            <div class="stat-icon me-3">
+              <i class="fas fa-shopping-cart"></i>
+            </div>
+            <div class="stat-content flex-grow-1">
+              <h3 class="stat-value">{{ formatNumber(dashboardStats.totalOrders) }}</h3>
+              <p class="stat-label">{{ 'DASHBOARD.TOTAL_ORDERS' | translate }}</p>
+              <span class="badge bg-success">+15.3%</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    
+    <div class="col-lg-3 col-md-6 mb-3">
+      <div class="card stat-card conversion-card h-100">
+        <div class="card-body">
+          <div class="d-flex align-items-center">
+            <div class="stat-icon me-3">
+              <i class="fas fa-chart-line"></i>
+            </div>
+            <div class="stat-content flex-grow-1">
+              <h3 class="stat-value">{{ dashboardStats.conversionRate }}%</h3>
+              <p class="stat-label">{{ 'DASHBOARD.CONVERSION_RATE' | translate }}</p>
+              <span class="badge bg-success">+2.1%</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Charts Section -->
+  <div class="row">
+    <!-- Revenue Chart -->
+    <div class="col-lg-8 mb-4">
+      <div class="card chart-card h-100">
+        <div class="card-header">
+          <h5 class="card-title mb-1">
+            <i class="fas fa-chart-line me-2"></i>
+            {{ 'DASHBOARD.REVENUE_TREND' | translate }}
+          </h5>
+          <p class="card-subtitle text-muted mb-0">{{ 'DASHBOARD.REVENUE_TREND_SUBTITLE' | translate }}</p>
+        </div>
+        <div class="card-body">
+          <div class="chart-container">
+            <canvas baseChart
+                    [data]="revenueChartData"
+                    [options]="revenueChartOptions"
+                    [type]="revenueChartType">
+            </canvas>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Subscription Distribution Chart -->
+    <div class="col-lg-4 mb-4">
+      <div class="card chart-card h-100">
+        <div class="card-header">
+          <h5 class="card-title mb-1">
+            <i class="fas fa-chart-pie me-2"></i>
+            {{ 'DASHBOARD.SUBSCRIPTION_DISTRIBUTION' | translate }}
+          </h5>
+          <p class="card-subtitle text-muted mb-0">{{ 'DASHBOARD.SUBSCRIPTION_DISTRIBUTION_SUBTITLE' | translate }}</p>
+        </div>
+        <div class="card-body">
+          <div class="chart-container">
+            <canvas baseChart
+                    [data]="subscriptionDistributionData"
+                    [options]="subscriptionDistributionOptions"
+                    [type]="subscriptionDistributionType">
+            </canvas>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="row">
+    <!-- User Growth Chart -->
+    <div class="col-lg-6 mb-4">
+      <div class="card chart-card h-100">
+        <div class="card-header">
+          <h5 class="card-title mb-1">
+            <i class="fas fa-user-plus me-2"></i>
+            {{ 'DASHBOARD.USER_GROWTH' | translate }}
+          </h5>
+          <p class="card-subtitle text-muted mb-0">{{ 'DASHBOARD.USER_GROWTH_SUBTITLE' | translate }}</p>
+        </div>
+        <div class="card-body">
+          <div class="chart-container">
+            <canvas baseChart
+                    [data]="userGrowthChartData"
+                    [options]="userGrowthChartOptions"
+                    [type]="userGrowthChartType">
+            </canvas>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Monthly Performance Chart -->
+    <div class="col-lg-6 mb-4">
+      <div class="card chart-card h-100">
+        <div class="card-header">
+          <h5 class="card-title mb-1">
+            <i class="fas fa-chart-bar me-2"></i>
+            {{ 'DASHBOARD.MONTHLY_PERFORMANCE' | translate }}
+          </h5>
+          <p class="card-subtitle text-muted mb-0">{{ 'DASHBOARD.MONTHLY_PERFORMANCE_SUBTITLE' | translate }}</p>
+        </div>
+        <div class="card-body">
+          <div class="chart-container">
+            <canvas baseChart
+                    [data]="monthlyPerformanceData"
+                    [options]="monthlyPerformanceOptions"
+                    [type]="monthlyPerformanceType">
+            </canvas>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>

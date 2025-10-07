@@ -1,0 +1,103 @@
+@import "../../../../assets/scss/variables";
+@import "../../../../assets/scss/mixins";
+
+.loading {
+    position: fixed;
+    background-color: $white_color;
+    width: 100%;
+    top: 0;
+    left: 0px;
+    height: 100vh;
+    align-items: center;
+    justify-content: center;
+    display: flex;
+    z-index: 9999;
+
+    img {
+        margin: auto;
+        animation: fadeinout 0.8s ease-in-out alternate infinite;
+    }
+}
+
+
+.spin {
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    position: absolute;
+    width: 240px;
+    height: 240px;
+    margin: auto;
+    border: 3px solid transparent;
+    @include border_radius(50%);
+    border-top-color: $main_color;
+    animation: spin 1.5s infinite linear;
+}
+
+.spin:before {
+    content: "";
+    border: 3px solid transparent;
+    border-top-color: $main_color;
+    @include border_radius(50%);
+    top: 3px;
+    left: 3px;
+    right: 3px;
+    bottom: 3px;
+    position: absolute;
+    animation: antispin 0.7s infinite linear;
+}
+
+@-webkit-keyframes spin {
+    100% {
+
+        @include transform(rotate(360deg));
+    }
+}
+
+@keyframes spin {
+    100% {
+
+        @include transform(rotate(360deg));
+    }
+}
+
+@-webkit-keyframes antispin {
+    from {
+        @include transform(rotate);
+    }
+
+    to {
+        @include transform(rotate(-360deg));
+    }
+}
+
+@keyframes antispin {
+    from {
+        @include transform(rotate);
+    }
+
+    to {
+        @include transform(rotate(-360deg));
+    }
+}
+
+@-webkit-keyframes fadeinout {
+    0% {
+        opacity: 1;
+    }
+
+    100% {
+        opacity: 0;
+    }
+}
+
+@keyframes fadeinout {
+    0% {
+        opacity: 1;
+    }
+
+    100% {
+        opacity: 0;
+    }
+}

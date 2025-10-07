@@ -1,0 +1,133 @@
+<div class="create-post-container">
+  <div class="row">
+    <div class="col-12">
+      <h2>{{ 'POST.CREATE_POST' | translate }}</h2>
+    </div>
+  </div>
+  
+  <form [formGroup]="postForm">
+    <div class="row">
+      <!-- Title Field -->
+      <div class="col-md-12 mb-3">
+        <label for="title" class="form-label">{{ 'POST.TITLE' | translate }} <span class="text-danger">*</span></label>
+        <input 
+          type="text" 
+          class="form-control" 
+          [class.is-invalid]="postForm.get('title')?.invalid && postForm.get('title')?.touched"
+          id="title" 
+          formControlName="title"
+          [placeholder]="'POST.ENTER_POST_TITLE' | translate">
+        <div class="invalid-feedback" *ngIf="postForm.get('title')?.invalid && showValidationErrors">
+          <span *ngIf="postForm.get('title')?.errors?.['required']">{{ 'POST.TITLE_REQUIRED' | translate }}</span>
+          <span *ngIf="postForm.get('title')?.errors?.['minlength']">{{ 'POST.TITLE_MIN_LENGTH' | translate }}</span>
+          <span *ngIf="postForm.get('title')?.errors?.['maxlength']">{{ 'POST.TITLE_MAX_LENGTH' | translate }}</span>
+          <span *ngIf="postForm.get('title')?.errors?.['pattern']">{{ 'POST.TITLE_PATTERN' | translate }}</span>
+        </div>
+      </div>
+
+      <!-- Content Field with HTML Editor -->
+      <div class="col-md-12 mb-3">
+        <label for="content" class="form-label">{{ 'POST.CONTENT' | translate }} <span class="text-danger">*</span></label>
+        <app-html-editor
+          formControlName="content"
+          [placeholder]="'POST.ENTER_POST_CONTENT' | translate"
+          [enableImageValidation]="true"
+          [imageValidationConfig]="imageValidationConfig"
+          [showWordCount]="true"
+          [showCharCount]="true"
+          [showImageCount]="true"
+          [maxChars]="10000"
+          [minlength]="20"
+          [required]="true"
+          [errorMessage]="'HTML_EDITOR.CONTENT_REQUIRED' | translate"
+          (statsChanged)="onStatsChanged($event)"
+          >
+        </app-html-editor>
+        <div class="invalid-feedback" *ngIf="postForm.get('content')?.invalid && showValidationErrors">
+          {{ 'HTML_EDITOR.CONTENT_REQUIRED' | translate }}
+        </div>
+
+		  <!-- Validation Errors (All Messages) -->
+    <div class="text-danger mt-2" *ngIf="htmlEditor?.hasValidationErrors">
+			<small *ngFor="let error of htmlEditor?.getValidationErrors()" class="d-block mb-1">
+			  <i class="fas fa-exclamation-triangle me-1"></i> {{ error.message | translate:{max: error.maxValue, current: error.currentValue} }}
+			</small>
+		  </div>
+
+      </div>
+     <!-- Cover Image Field -->
+      <div class="col-12 mb-3">
+        <label for="coverImage" class="form-label">{{ 'POST.COVER_IMAGE' | translate }}</label>
+        <input 
+          type="file" 
+          class="form-control" 
+          [class.is-invalid]="postForm.get('coverImage')?.invalid && postForm.get('coverImage')?.touched"
+          id="coverImage" 
+          formControlName="coverImage"
+          accept="image/jpeg,image/png,image/gif,image/webp"
+          (change)="onCoverImageSelected($event)">
+        <div class="form-text">{{ 'POST.COVER_IMAGE_HELP' | translate }}</div>
+        <div class="invalid-feedback" *ngIf="postForm.get('coverImage')?.invalid && showValidationErrors">
+          <span *ngIf="postForm.get('coverImage')?.errors?.['required']">{{ 'POST.COVER_IMAGE_REQUIRED' | translate }}</span>
+          <span *ngIf="postForm.get('coverImage')?.errors?.['fileType']">{{ 'POST.COVER_IMAGE_INVALID_TYPE' | translate }}</span>
+          <span *ngIf="postForm.get('coverImage')?.errors?.['fileSize']">{{ 'POST.COVER_IMAGE_TOO_LARGE' | translate }}</span>
+        </div>
+        
+        <!-- Cover Image Preview -->
+        <div *ngIf="coverImagePreview" class="mt-3">
+          <img [src]="coverImagePreview" alt="Cover Preview" class="img-thumbnail" style="max-width: 200px; max-height: 200px;">
+          <div class="mt-2">
+            <button type="button" class="btn btn-sm btn-outline-danger" (click)="removeCoverImage()">
+              <i class="fas fa-trash"></i> {{ 'POST.REMOVE_IMAGE' | translate }}
+            </button>
+          </div>
+        </div>
+      </div>
+      <!-- Category Field -->
+      <div class="col-md-6 mb-3">
+        <label for="category" class="form-label">{{ 'POST.CATEGORY' | translate }} <span class="text-danger">*</span></label>
+        <select class="form-control" [class.is-invalid]="postForm.get('category')?.invalid && postForm.get('category')?.touched" id="category" formControlName="category">
+          <option value="">{{ 'POST.SELECT_CATEGORY' | translate }}</option>
+          <option *ngFor="let category of categories" [value]="category.id">
+            {{ category.name }}
+          </option>
+        </select>
+        <div class="invalid-feedback" *ngIf="postForm.get('category')?.invalid && showValidationErrors">
+          {{ 'POST.CATEGORY_REQUIRED' | translate }}
+        </div>
+      </div>
+
+
+ 
+
+      <!-- Action Buttons -->
+      <div class="col-12">
+        <div class="d-flex justify-content-end gap-2">
+          <button 
+            type="button" 
+            class="btn btn-secondary"
+            (click)="onCancel()"
+            [disabled]="isSubmitting || isDraftSubmitting">
+            {{ 'POST.CANCEL' | translate }}
+          </button>
+          <button 
+            type="button" 
+            class="btn btn-outline-primary" 
+            (click)="onSaveDraft()"
+            [disabled]="isSubmitting || isDraftSubmitting">
+            <i class="fas fa-spinner fa-spin me-2" *ngIf="isDraftSubmitting"></i>
+            {{ 'POST.SAVE_DRAFT' | translate }}
+          </button>
+          <button 
+            type="button" 
+            class="btn btn-primary" 
+            (click)="onPublish()"
+            [disabled]="isSubmitting || isDraftSubmitting">
+            <i class="fas fa-spinner fa-spin me-2" *ngIf="isSubmitting"></i>
+            {{ 'POST.PUBLISH' | translate }}
+          </button>
+        </div>
+      </div>
+    </div>
+  </form>
+</div>

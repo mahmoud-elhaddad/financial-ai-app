@@ -1,0 +1,44 @@
+
+<div class="col-12 d-flex align-items-center justify-content-between header_content app-header" [ngClass]="{ 'with-sidebar': isSideMenuVisible }">
+    <div class="mobile_view">
+        <img src="assets/images/logo.svg" alt="">
+    </div>
+
+    <div class="user_links d-inline-flex w-100 align-items-center justify-content-between">
+        <div>
+        <!-- <a routerLink="" class="me_16">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                <path
+                    d="M20.8308 3.01547H3.16922C1.42172 3.01547 0 4.43719 0 6.18469V17.8153C0 19.5628 1.42172 20.9845 3.16922 20.9845H20.8308C22.5783 20.9845 24 19.5628 24 17.8153V6.18469C24 4.43719 22.5783 3.01547 20.8308 3.01547ZM17.3306 12.3412L22.357 7.61531V17.0672L17.3306 12.3412ZM3.16922 4.65891H20.8308C21.4294 4.65891 21.9487 5.00578 22.1986 5.50875L13.0453 14.115C12.4594 14.6662 11.5411 14.6662 10.9547 14.115L1.80187 5.50875C2.05125 5.00578 2.57063 4.65891 3.16922 4.65891ZM1.64344 17.0672V7.61578L6.66984 12.3417L1.64344 17.0672ZM3.16922 19.3411C2.75063 19.3411 2.37094 19.1719 2.09531 18.8981L7.86891 13.4695L9.82875 15.3127C10.4377 15.885 11.2186 16.1709 11.9995 16.1709C12.7805 16.1709 13.5619 15.885 14.1703 15.3127L16.1306 13.4695L21.9047 18.8981C21.6286 19.1719 21.2494 19.3411 20.8308 19.3411H3.16922Z"
+                    fill="#1AAED3" />
+            </svg>
+        </a> -->
+     
+        <button class="lang_link border-0 bg-transparent p-0 me_16" (click)="switchLanguage()">
+            <img [src]="displayLanguage().flag" width="20" height="20" alt="Flag" class="me_8 flag" />
+            <span>{{ displayLanguage().text }}</span>
+        </button>
+        </div>
+
+        <div class="user d-inline-flex">
+            
+            <div class="cont fs-18 fw-600">
+                {{userData?.name}}
+                <span class="d-block mt_2  fs-16 fw-500"> {{ userRole }}</span>
+            </div>
+        </div>
+        <button (click)="openSideMenu()" class="btn_icon ms_16">
+            <svg width="15" height="11" viewBox="0 0 20 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path
+                    d="M18.6667 2.66667H1.33333C0.597 2.66667 0 2.06967 0 1.33333C0 0.597 0.597 0 1.33333 0H18.6667C19.403 0 20 0.597 20 1.33333C20 2.06967 19.403 2.66667 18.6667 2.66667Z"
+                    fill="#fff" />
+                <path
+                    d="M18.6667 15.9987H1.33333C0.597 15.9987 0 15.4017 0 14.6654C0 13.929 0.597 13.332 1.33333 13.332H18.6667C19.403 13.332 20 13.929 20 14.6654C20 15.4017 19.403 15.9987 18.6667 15.9987Z"
+                    fill="#fff" />
+                <path
+                    d="M18.6667 9.33464H1.33333C0.597 9.33464 0 8.73764 0 8.0013C0 7.26497 0.597 6.66797 1.33333 6.66797H18.6667C19.403 6.66797 20 7.26497 20 8.0013C20 8.73764 19.403 9.33464 18.6667 9.33464Z"
+                    fill="#fff" />
+            </svg>
+        </button>
+    </div>
+</div>

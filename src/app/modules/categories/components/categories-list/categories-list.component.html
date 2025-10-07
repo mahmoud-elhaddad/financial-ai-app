@@ -1,0 +1,75 @@
+<div class="settings-container">
+  <div class="row">
+    <div class="col-12">
+      <app-breadcrumbs (onClickEvent)="onBreadcrumbClicked($event)" [breadcrumbs]="breadcrumbItems"
+        [size]="breadcrumbSizeEnum.Medium" divider=">"></app-breadcrumbs>
+    </div>
+    <div class="col-12">
+      <h2 class="main_head">{{ 'SIDEMENU.CATEGORIES' | translate }}</h2>
+    </div>
+  </div>
+
+  <div class="row mb-3">
+    <!-- Mobile Number -->
+    <div class="col-lg-3 mt_32">
+      <div class="form-group">
+        <label for="">
+          {{ 'CATEGORIES_LIST.FULLNAME' | translate }}
+        </label>
+        <input type="text" class="form-control form-select-input" maxlength="150" [(ngModel)]="filter.fullName"
+          name="fullName" [placeholder]="'CATEGORIES_LIST.FULLNAME' | translate" />
+      </div>
+    </div>
+
+    <!-- Status -->
+    <!-- Uncomment when API supports it -->
+    <!--
+    <div class="col-lg-3 mt_32">
+      <div class="form-group">
+        <label for="">
+          {{ 'USERS_LIST.STATUS' | translate }}
+        </label>
+        <mat-select
+          class="form-select-input"
+          [placeholder]="'USERS_LIST.STATUS' | translate"
+          [(ngModel)]="filter.status"
+          name="status"
+        >
+          <mat-option [value]="0">{{ 'USERS_LIST.ACTIVE' | translate }}</mat-option>
+          <mat-option [value]="1">{{ 'USERS_LIST.SUSPENDED' | translate }}</mat-option>
+        </mat-select>
+      </div>
+    </div>
+    -->
+
+    <!-- Actions -->
+    <div class="col-12 d-flex justify-content-end">
+      <button class="main_btn" (click)="applyFilter()">
+        {{ 'FORM.FILLTER' | translate }}
+      </button>
+      <button class="main_btn main_btn--gray" (click)="resetFilter()">
+        {{ 'FORM.RESET' | translate }}
+      </button>
+     
+    </div>
+  </div>
+
+  <!-- Refresh + Table -->
+  <div class="row pt-3 topLine">
+
+    <div class="col-12">
+      <div class="d-flex justify-content-end mb-2 align-items-center">
+         <button class="main_btn main_btn--primary " (click)="openCreateCategoryDialog()">
+        {{ 'CATEGORIES_LIST.CREATE_CATEGORY' | translate }}
+      </button>
+         <button class=" border-0 refreshBtn p-0 m-0" (click)="getCategoriesDataList()">
+        <i class="fa-solid fa-arrows-rotate"></i>
+      </button>
+      </div>
+      <app-shared-table [dataSource]="dataSource" [columnConfigs]="columnConfigs" [collectionSize]="collectionSize!"
+        [pageSize]="filter.limit" (pageChanged)="onPageChange($event)" [noDataMessage]="noDataMessage!"
+        (actionClicked)="handleAction($event)">
+      </app-shared-table>
+    </div>
+  </div>
+</div>

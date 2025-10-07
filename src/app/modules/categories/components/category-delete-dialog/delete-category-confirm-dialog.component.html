@@ -1,0 +1,18 @@
+<div [dir]="direction" class="delete-dialog">
+  <h2 mat-dialog-title class="delete-dialog__title">
+    {{ 'CATEGORIES_LIST.DELETE_CATEGORY_CONFIRM_TITLE' | translate }}
+  </h2>
+
+  <mat-dialog-content class="delete-dialog__content">
+    <p [innerHTML]="translate.instant('CATEGORIES_LIST.DELETE_CATEGORY_CONFIRM_MSG', {name: data.name})"></p>
+  </mat-dialog-content>
+
+  <mat-dialog-actions align="end" class="delete-dialog__actions">
+    <button mat-button class="main_btn main_btn--gray" (click)="onCancel()">
+      {{ 'BUTTONS.CANCEL' | translate }}
+    </button>
+    <button mat-flat-button color="warn" class="main_btn main_btn--danger" (click)="onConfirm()">
+      {{ 'BUTTONS.DELETE' | translate }}
+    </button>
+  </mat-dialog-actions>
+</div>

@@ -1,0 +1,293 @@
+// Dashboard Styles
+.dashboard-header {
+  margin-bottom: 2rem;
+  
+  .dashboard-title {
+    font-size: 2rem;
+    font-weight: 600;
+    color: #2c3e50;
+    margin: 0;
+  }
+  
+  .dashboard-subtitle {
+    color: #6c757d;
+    margin: 0.5rem 0 0 0;
+    font-size: 1rem;
+  }
+}
+
+// Statistics Cards
+.stat-card {
+  border-radius: 16px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+  transition: all 0.3s ease;
+  border: none;
+  background: #ffffff;
+  
+  &:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.12);
+  }
+  
+  .card-body {
+    padding: 2rem 1.5rem;
+  }
+  
+  .stat-icon {
+    width: 60px;
+    height: 60px;
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-right: 1rem;
+    
+    i {
+      font-size: 1.5rem;
+      color: #ffffff;
+    }
+  }
+  
+  .stat-content {
+    .stat-value {
+      font-size: 2rem;
+      font-weight: 700;
+      margin: 0 0 0.5rem 0;
+      color: #1a1a1a;
+      line-height: 1.2;
+    }
+    
+    .stat-label {
+      font-size: 0.75rem;
+      color: #8e8e8e;
+      margin: 0 0 0.75rem 0;
+      text-transform: uppercase;
+      letter-spacing: 0.8px;
+      font-weight: 500;
+    }
+    
+    .badge {
+      font-size: 0.7rem;
+      font-weight: 600;
+      padding: 0.3rem 0.8rem;
+      border-radius: 20px;
+      background: linear-gradient(135deg, #4CAF50, #45a049);
+      border: none;
+    }
+  }
+}
+
+// Card color variants
+.revenue-card {
+  .stat-icon {
+    background: linear-gradient(135deg, #4CAF50, #45a049);
+  }
+}
+
+.users-card {
+  .stat-icon {
+    background: linear-gradient(135deg, #2196F3, #1976D2);
+  }
+}
+
+.orders-card {
+  .stat-icon {
+    background: linear-gradient(135deg, #FF9800, #F57C00);
+  }
+}
+
+.conversion-card {
+  .stat-icon {
+    background: linear-gradient(135deg, #F44336, #D32F2F);
+  }
+}
+
+// Chart Cards
+.chart-card {
+  border-radius: 12px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  border: none;
+  
+  .card-header {
+    background-color: #f8f9fa;
+    border-bottom: 1px solid #dee2e6;
+    padding: 1.5rem;
+    
+    .card-title {
+      display: flex;
+      align-items: center;
+      font-size: 1.25rem;
+      font-weight: 600;
+      color: #2c3e50;
+      margin: 0;
+      
+      i {
+        color: #007bff;
+      }
+    }
+    
+    .card-subtitle {
+      color: #6c757d;
+      font-size: 0.9rem;
+      margin: 0;
+    }
+  }
+  
+  .card-body {
+    padding: 1.5rem;
+    
+    .chart-container {
+      position: relative;
+      height: 300px;
+      width: 100%;
+    }
+  }
+}
+
+// Table Card
+.table-card {
+  border-radius: 12px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  border: none;
+  
+  .card-header {
+    background-color: #f8f9fa;
+    border-bottom: 1px solid #dee2e6;
+    padding: 1.5rem;
+    
+    .card-title {
+      display: flex;
+      align-items: center;
+      font-size: 1.25rem;
+      font-weight: 600;
+      color: #2c3e50;
+      margin: 0;
+      
+      i {
+        color: #007bff;
+      }
+    }
+    
+    .card-subtitle {
+      color: #6c757d;
+      font-size: 0.9rem;
+      margin: 0;
+    }
+  }
+  
+  .card-body {
+    padding: 1.5rem;
+  }
+}
+
+// Responsive Design
+@media (max-width: 768px) {
+  .dashboard-header {
+    .d-flex {
+      flex-direction: column;
+      align-items: flex-start !important;
+      
+      .btn {
+        margin-top: 1rem;
+        width: 100%;
+      }
+    }
+  }
+  
+  .stat-card {
+    .card-body {
+      .d-flex {
+        flex-direction: column;
+        text-align: center;
+        
+        .stat-icon {
+          margin-right: 0 !important;
+          margin-bottom: 1rem;
+        }
+      }
+    }
+  }
+  
+  .chart-container {
+    height: 250px !important;
+  }
+}
+
+@media (max-width: 576px) {
+  .dashboard-title {
+    font-size: 1.5rem !important;
+  }
+  
+  .stat-value {
+    font-size: 1.5rem !important;
+  }
+  
+  .chart-container {
+    height: 200px !important;
+  }
+}
+
+// Animation for loading
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.dashboard-content {
+  animation: fadeIn 0.5s ease-in-out;
+}
+
+// Custom scrollbar for better UX
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: #f1f1f1;
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #c1c1c1;
+  border-radius: 4px;
+  
+  &:hover {
+    background: #a8a8a8;
+  }
+}
+
+// Bootstrap overrides for better styling
+.card {
+  border: none;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.btn-primary {
+  background-color: #007bff;
+  border-color: #007bff;
+  
+  &:hover {
+    background-color: #0056b3;
+    border-color: #004085;
+  }
+}
+
+.badge.bg-success {
+  background-color: #28a745 !important;
+}
+
+// Chart container improvements
+.chart-container {
+  position: relative;
+  
+  canvas {
+    max-width: 100%;
+    height: auto;
+  }
+}

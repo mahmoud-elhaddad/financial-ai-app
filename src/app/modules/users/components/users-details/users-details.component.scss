@@ -1,0 +1,49 @@
+.userDetails {
+  .title {
+    font-size: 14px;
+    font-weight: 600;
+    color: #0084A4; // brand main color
+    margin-bottom: 4px;
+  }
+
+  .value {
+    font-size: 16px;
+    font-weight: 500;
+    color: #1C1C1C; // almost black for clarity
+  }
+
+}
+  .section-title {
+    font-size: 18px;
+    font-weight: 700;
+    color: #0084A4;
+    margin-bottom: 16px;
+   
+    padding-bottom: 4px;
+  }
+.userDetails {
+
+
+  .title {
+    font-size: 14px;
+    font-weight: 600;
+    color: #0084A4;
+    margin-bottom: 4px;
+  }
+
+  .value {
+    font-size: 16px;
+    font-weight: 500;
+    color: #1C1C1C;
+
+    &.active {
+      color: #28a745; // green for active
+      font-weight: 600;
+    }
+
+    &.inactive {
+      color: #dc3545; // red for inactive
+      font-weight: 600;
+    }
+  }
+}

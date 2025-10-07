@@ -1,0 +1,35 @@
+<h2 mat-dialog-title >
+  {{ data ? ('CATEGORIES_LIST.EDIT_CATEGORY' | translate) : ('CATEGORIES_LIST.CREATE_CATEGORY' | translate) }}
+</h2>
+<form [formGroup]="categoryForm" (ngSubmit)="onSubmit()" [dir]="direction" [ngClass]="direction">
+  <mat-form-field appearance="outline" class="mb-5 category-field" [ngClass]="direction">
+    <input matInput formControlName="arN" required type="text" [placeholder]="'CATEGORIES_LIST.ARNAME' | translate">
+    <mat-error
+      *ngIf="categoryForm.get('arN')?.invalid && (categoryForm.get('arN')?.touched || categoryForm.get('arN')?.dirty || submitted)">
+      <ng-container *ngIf="categoryForm.get('arN')?.hasError('required')">
+        {{ 'CATEGORIES_LIST.ARNAME_REQUIRED' | translate }}
+      </ng-container>
+      <ng-container *ngIf="categoryForm.get('arN')?.hasError('pattern')">
+        {{ 'CATEGORIES_LIST.ARNAME_ARABIC_ONLY' | translate }}
+      </ng-container>
+    </mat-error>
+  </mat-form-field>
+  <mat-form-field appearance="outline" class="mb-5 category-field" [ngClass]="direction">
+    <input matInput formControlName="enN" required type="text" [placeholder]="'CATEGORIES_LIST.ENNAME' | translate">
+    <mat-error
+      *ngIf="categoryForm.get('enN')?.invalid && (categoryForm.get('enN')?.touched || categoryForm.get('enN')?.dirty || submitted)">
+      <ng-container *ngIf="categoryForm.get('enN')?.hasError('required')">
+        {{ 'CATEGORIES_LIST.ENNAME_REQUIRED' | translate }}
+      </ng-container>
+      <ng-container *ngIf="categoryForm.get('enN')?.hasError('pattern')">
+        {{ 'CATEGORIES_LIST.ENNAME_ENGLISH_ONLY' | translate }}
+      </ng-container>
+    </mat-error>
+  </mat-form-field>
+  <div mat-dialog-actions [ngClass]="direction" align="end">
+    <button mat-flat-button color="primary"
+      type="submit">{{ data ? ('CATEGORIES_TABLE.EDIT' | translate) : ('BUTTONS.CREATE' | translate) }}</button>
+    <button mat-button type="button"
+      (click)="onCancel()">{{ 'BUTTONS.CANCEL' | translate }}</button>
+  </div>
+</form>

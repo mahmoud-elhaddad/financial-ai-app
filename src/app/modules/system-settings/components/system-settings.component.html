@@ -1,0 +1,58 @@
+<div class="settings-container" *ngIf="systemSettings">
+    <div class="col-12">
+            <app-breadcrumbs (onClickEvent)="onBreadcrumbClicked($event)" [breadcrumbs]="breadcrumbItems" [size]="breadcrumbSizeEnum.Medium"  divider=">"></app-breadcrumbs>
+        </div>
+<div class="col-12">
+            <h2 class="main_head">{{ 'SIDEMENU.SYSTEM_SETTING' | translate }}</h2>
+        </div>
+  <!-- Session Timeout -->
+  <div class="form-group">
+    <label for="sessionTimeout">{{ 'SETTINGS.SESSION_TIMEOUT' | translate }}</label>
+    <input type="number"
+           id="sessionTimeout"
+           class="form-control"
+           [(ngModel)]="systemSettings.sessionTimeoutMinutes"
+           name="sessionTimeout"
+           min="30"
+           max="480"
+           required>
+    <small class="text-muted">{{ 'SETTINGS.SESSION_TIMEOUT_RANGE' | translate }}</small>
+
+    <div class="text-danger mt-1"
+         *ngIf="systemSettings.sessionTimeoutMinutes < 30 || systemSettings.sessionTimeoutMinutes > 480">
+    {{ 'SETTINGS.SESSION_TIMEOUT_ERROR' | translate }}
+    </div>
+  </div>
+
+  <!-- OTP Validation Time -->
+  <div class="form-group mt-3" >
+    <label for="otpValidation">{{ 'SETTINGS.OTP_VALIDATION_TIME' | translate }}</label>
+    <input type="number"
+           id="otpValidation"
+           class="form-control"
+           [(ngModel)]="systemSettings.otpValidationSeconds"
+           name="otpValidation"
+           min="30"
+           max="120"
+           required>
+    <small class="text-muted">{{ 'SETTINGS.OTP_VALIDATION_RANGE' | translate }}</small>
+
+    <div class="text-danger mt-1"
+         *ngIf="systemSettings.otpValidationSeconds < 30 || systemSettings.otpValidationSeconds > 120">
+         {{ 'SETTINGS.OTP_VALIDATION_ERROR' | translate }}
+    </div>
+  </div>
+
+  <!-- Save Button -->
+  <div class="mt-4 text-end">
+    <button class=" main_btn px-4" (click)="saveSettings()"
+            [disabled]="systemSettings.sessionTimeoutMinutes < 30 || systemSettings.sessionTimeoutMinutes > 480 ||
+                        systemSettings.otpValidationSeconds < 30 || systemSettings.otpValidationSeconds > 120">
+     {{ 'BUTTONS.SAVE_CHANGES' | translate }}
+    </button>
+     <button class=" btn-cancel px-4" (click)="cancel()">
+    {{ 'BUTTONS.CANCEL' | translate }}
+  </button>
+  </div>
+
+</div>

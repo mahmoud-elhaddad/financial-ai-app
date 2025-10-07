@@ -1,0 +1,105 @@
+<div class="settings-container">
+  <div class="row">
+    <div class="col-12">
+      <app-breadcrumbs (onClickEvent)="onBreadcrumbClicked($event)" [breadcrumbs]="breadcrumbItems"
+        [size]="breadcrumbSizeEnum.Medium" divider=">"></app-breadcrumbs>
+    </div>
+    <div class="col-12">
+      <h2 class="main_head">{{ 'SIDEMENU.POSTS' | translate }}</h2>
+    </div>
+  </div>
+
+  <div class="row mb-2">
+    <!-- Mobile Number -->
+  
+
+    <!-- Name -->
+    <div class="col-lg-3 mt_32">
+      <div class="form-group">
+        <label for="">
+          {{ 'NEWS.TITLE' | translate }}
+        </label>
+        <input type="text" class="form-control form-select-input" maxlength="150" [(ngModel)]="filter.title" name="title"
+          [placeholder]="'NEWS.TITLE' | translate" />
+      </div>
+    </div>
+
+
+    <!-- Status -->
+    <!-- Uncomment when API supports it -->
+    
+    <div class="col-lg-3 mt_32">
+      <div class="form-group">
+        <label for="">
+          {{ 'USERS_LIST.STATUS' | translate }}
+        </label>
+        <mat-select
+          class="form-select-input"
+          [placeholder]="'USERS_LIST.STATUS' | translate"
+          [(ngModel)]="filter.status"
+          name="status"
+        >
+          <mat-option [value]="'p'">{{ 'NEWS.PUPLISHED' | translate }}</mat-option> 
+          <mat-option [value]="'a'">{{ 'NEWS.ARCIVED' | translate }}</mat-option>
+          <mat-option [value]="'d'">{{ 'NEWS.DRAFT' | translate }}</mat-option>
+          
+        </mat-select>
+      </div>
+    </div>
+
+    <!-- Actions -->
+    <div class="col-12 d-flex justify-content-end">
+      <button class="main_btn" (click)="applayFilter()">
+        {{ 'FORM.FILLTER' | translate }}
+      </button>
+      <button class="main_btn main_btn--gray" (click)="resetFilter()">
+        {{ 'FORM.RESET' | translate }}
+      </button>
+    </div>
+  </div>
+
+  <!-- Refresh + Table -->
+  <div class="row pt-3 topLine">
+   
+    <div class="col-12">
+      <div  class="d-flex justify-content-end align-items-center">
+        <button class="main_btn" [routerLink]="['/news/create-post']">
+        {{ 'NEWS.CREATE' | translate }}
+      </button>
+           <button class="refreshBtn border-0 p-0 m-0" (click)="getNewsDataList()">
+        <i class="fa-solid fa-arrows-rotate"></i>
+      </button>
+      
+      </div>
+      <app-shared-table [dataSource]="dataSource" [columnConfigs]="columnConfigs" [collectionSize]="collectionSize"
+        [pageSize]="filter.limit" (pageChanged)="onPageChange($event)" [noDataMessage]="noDataMessage"
+        (actionClicked)="handleAction($event)">
+      </app-shared-table>
+    </div>
+  </div>
+</div>
+
+<!-- Delete delegate -->
+<ng-template #arciveDialogTemplate>
+  <div class="delete-dialog">
+    <div class="dialog-box">
+   <h2 mat-dialog-title class="delete-dialog__title">
+    {{ 'NEWS.ARCIVE_CATEGORY_CONFIRM_TITLE' | translate }}
+  </h2>
+      <div class="delete-dialog__content">
+    <p >
+      {{ 'NEWS.ARCIVE_CATEGORY_CONFIRM_MSG' | translate }}
+    </p>
+  </div>
+   <div align="end" class="delete-dialog__actions">
+    <button mat-button class="main_btn main_btn--gray" (click)="closeDeleteDialog()">
+      {{ 'BUTTONS.CANCEL' | translate }}
+    </button>
+    <button mat-flat-button color="warn" class="main_btn main_btn--danger" (click)="archivePost()">
+      {{ 'BUTTONS.ARCIVE' | translate }}
+    </button>
+  </div>
+    
+    </div>
+  </div>
+</ng-template>

@@ -1,0 +1,59 @@
+<div class="settings-container">
+    <div class="row">
+        <div class="col-12">
+            <app-breadcrumbs (onClickEvent)="onBreadcrumbClicked($event)" [breadcrumbs]="breadcrumbItems" [size]="breadcrumbSizeEnum.Medium"  divider=">"></app-breadcrumbs>
+        </div>
+        <div class="col-12">
+            <h2 class="main_head section-title">{{ 'USERS_LIST.DETAILS' | translate }}</h2>
+        </div>
+    </div>
+
+    <div class="row userDetails">
+        <div class="col-md-3 mt-4">
+            <h4 class="title">{{ 'USERS_LIST.FRIST_NAME' | translate }}</h4>
+            <h5 class="value"> {{userData?.fn}} </h5>
+        </div>
+        <div class="col-md-3 mt-4">
+            <h4 class="title">{{ 'USERS_LIST.LAST_NAME' | translate }}</h4>
+            <h5 class="value"> {{userData?.ln}} </h5>
+        </div>
+        <div class="col-md-3 mt-4">
+            <h4 class="title">{{ 'USERS_LIST.MOBILE_NUM' | translate }}</h4>
+            <h5 class="value"> {{userData?.mn}} </h5>
+        </div>
+        <!-- <div class="col-md-3 mt-4">
+            <h4 class="title">{{ 'USERS_LIST.STATUS' | translate }}</h4>
+            <h5 class="value">Active</h5>
+        </div> -->
+        <div class="col-md-3 mt-4">
+            <h4 class="title">{{ 'USERS_LIST.DATE' | translate }}</h4>
+            <h5 class="value"> {{userData?.rd | date: 'longDate'}} </h5>
+        </div>
+        <div class="col-12 mt-5">
+    <h3 class="section-title">{{ 'SUBSCRIPTIONS.DETAILS' | translate }}</h3>
+<div class="row">
+  <div class="col-md-3 mb-3">
+    <h4 class="title">{{ 'SUBSCRIPTIONS.PLAN' | translate }}</h4>
+    <h5 class="value">{{ 'SUBSCRIPTIONS.PREMIUM' | translate }}</h5>
+  </div>
+  <div class="col-md-3 mb-3">
+    <h4 class="title">{{ 'SUBSCRIPTIONS.START_DATE' | translate }}</h4>
+    <h5 class="value">01/08/2025</h5>
+  </div>
+  <div class="col-md-3 mb-3">
+    <h4 class="title">{{ 'SUBSCRIPTIONS.EXPIRY_DATE' | translate }}</h4>
+    <h5 class="value">01/08/2026</h5>
+  </div>
+  <div class="col-md-3 mb-3">
+    <h4 class="title">{{ 'SUBSCRIPTIONS.STATUS' | translate }}</h4>
+    <h5 class="value active">{{ 'SUBSCRIPTIONS.ACTIVE' | translate }}</h5>
+  </div>
+</div>
+        </div>
+        <div class="col-12 mt-4 text-end">
+            <button class="main_btn" [routerLink]="'/users-list'">{{ 'USERS_LIST.BACK' | translate }}</button>
+        </div>
+    </div>
+
+    
+</div>

@@ -1,0 +1,203 @@
+@import "../../../../assets/scss/variables";
+@import "../../../../assets/scss/mixins";
+
+.overScroll {
+    overflow: hidden;
+    overflow-x: auto;
+    padding-bottom: 8px;
+
+    &::-webkit-scrollbar {
+        width: 0.25rem;
+        height: 0.25rem;
+    }
+}
+
+table {
+    width: 100%;
+    background-color: transparent;
+    
+}
+
+.mat-mdc-table {
+    @include border_radius(0.5rem);
+
+    .mdc-data-table__row:last-child {
+        .mdc-data-table__cell {
+            border-top: 0;
+
+            &:first-child {
+                @include border_radius(0 0 0.625rem 0);
+
+                &:lang(en) {
+                    @include border_radius(0 0 0 0.625rem);
+                }
+            }
+
+            &:last-child {
+                @include border_radius(0 0 0 0.625rem);
+
+                &:lang(en) {
+                    @include border_radius(0 0 0.625rem 0);
+                }
+            }
+        }
+    }
+
+    tr.mat-mdc-row {
+        height: auto;
+    }
+
+    th.mat-mdc-header-cell,
+    td.mat-mdc-cell,
+    td.mat-mdc-footer-cell {
+        font-size: 14px;
+        font-weight: 500;
+        color: $dark_color;
+        padding: 8px 16px;
+        line-height: 20px;
+        overflow: hidden;
+        text-align: start;
+        font-family: $main_font !important;
+        background-color: $white_color;
+        position: relative;
+        border-bottom: 1px solid #E6E6E6;
+        border-left: 1px solid #E6E6E6;
+        // min-width: 170px;
+
+        @include mediaquery(max, l_desktop) {
+            min-width: 210px;
+        }
+    }
+
+    th.mat-mdc-header-cell {
+        color: #212121;
+        font-size: 14px;
+        border-top: 0;
+        font-weight: 600;
+        background-color: #EBF3FC;
+    }
+
+
+
+
+    .mat-column-logo {
+        max-width: 100px !important;
+        min-width: 100px !important;
+        width: 100px !important;
+    }
+
+
+
+}
+
+.no_data {
+    background-color: $white_color;
+
+    img {
+        width: 100%;
+        max-width: 540px;
+    }
+
+    p {
+        color: $warn_color;
+        position: relative;
+        z-index: 99;
+        text-transform: capitalize;
+    }
+}
+
+.icon {
+    width: 40px;
+    height: 40px;
+    text-align: center;
+    line-height: 40px;
+    margin-inline-end: 4px;
+    cursor: pointer;
+    @include border-radius($border_radius);
+
+    &_edit {
+        background-color: rgba($green_color, 0.1);
+
+        path {
+            stroke: $green_color;
+        }
+    }
+
+    &_view {
+        background-color: rgba($main_color, 0.1);
+
+        path {
+            stroke: $main_color;
+        }
+    }
+    &_Archive {
+        background-color: rgba(#04528E, 0.1);
+
+       
+    }
+
+    &_unasign,
+    &_reject,
+    &_delete {
+        background-color: rgba($warn_color, 0.1);
+
+        path {
+            fill: $warn_color;
+        }
+    }
+
+    &_download {
+        background-color: rgba($green_color, 0.1);
+
+        path {
+            fill: $green_color;
+        }
+    }
+    &_republished {
+        background-color: rgba($green_color, 0.1);
+
+       color: $green_color;
+    }
+}
+
+::ng-deep {
+    .pagination {
+        margin: 2rem 0 0;
+        padding: 0;
+        display: flex;
+        justify-content: end;
+
+        .page-item {
+            .page-link {
+                font-size: 0.875rem;
+                color: $main_color;
+                background-color: #f7f9fd;
+                line-height: 1.875rem;
+                padding: 0;
+                width: 1.875rem;
+                text-align: center;
+                border: 1px solid #EBEBEB;
+               
+                width: 1.875rem;
+                text-align: center;
+
+                &:hover {
+                    color: $white_color;
+                    background-color: $main_color;
+                }
+            }
+
+            &.active {
+                .page-link {
+                    color: $white_color;
+                    @include box_no_shadow;
+                    background-color: $main_color;
+                }
+            }
+        }
+    }
+}
+.checkRow{
+    min-width: 50px !important;
+    width: 50px !important;
+}

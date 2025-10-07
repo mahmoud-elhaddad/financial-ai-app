@@ -1,0 +1,87 @@
+<div class="login d-flex  align-items-center justify-content-evenly">
+    <img src="assets/images/white_logo.svg" alt="logo" class="">
+    <div class="login_form d-flex  align-items-center justify-content-center flex-column shadow">
+
+        <div class="login_form_cont">
+            <!-- <img src="assets/images/logo.svg" alt="logo" class="logo"> -->
+            <div class="head">
+                <h3 class="fs-32 fw-600 mb_16">
+                    {{'LOGIN.TITLE' | translate}}
+                </h3>
+                <!-- <p class="fs-18 fw-500 mb_48">
+                    {{'LOGIN.SUBTITLE' | translate}}
+                </p> -->
+            </div>
+            <div class="form-group">
+                <label>{{'LOGIN.EMAIL' | translate}} <sup>*</sup></label>
+                <input type="email" class="form-control" [(ngModel)]="loginRequest.email"
+                    placeholder="{{'LOGIN.EMAIL' | translate}}" (keydown)="Space($event)" required email
+                    #email="ngModel" [class.is-invalid]="email.invalid && email.touched">
+                @if(email.errors && email.touched) {
+                <div>
+                    @if(email.errors['required']) {
+                    <span class="error_msg">{{ 'VALIDATION.REQUIRED' | translate }}</span>
+                    }
+                    @if(email.errors['email']) {
+                    <span class="error_msg">{{ 'VALIDATION.INVALID_EMAIL' | translate }}</span>
+                    }
+                </div>
+                }
+            </div>
+            <div class="form-group password_group">
+                <label>{{'LOGIN.PASSWORD' | translate}} <sup>*</sup></label>
+                <input class="form-control" placeholder="{{'LOGIN.PASSWORD' | translate}}" (keydown)="Space($event)"
+                    required password #password="ngModel" [class.is-invalid]="password.invalid && password.touched"
+                    [(ngModel)]="loginRequest.password" [type]="showPassword ? 'text' : 'password'">
+                <button (click)="togglePasswordVisibility()" class="p-0 border-0 bg-transparent ">
+                    @if(!showPassword){
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path
+                            d="M12 19.7563C7.50797 19.7563 3.20699 16.4515 0.367971 13.0205C-0.122657 12.4275 -0.122657 11.5668 0.367971 10.9738C1.08177 10.1112 2.57762 8.4469 4.57584 6.99238C9.60876 3.32899 14.3814 3.32193 19.4241 6.99238C21.7716 8.7011 23.632 10.9418 23.632 10.9738C24.1226 11.5668 24.1226 12.4275 23.632 13.0205C20.7934 16.451 16.493 19.7563 12 19.7563ZM12 5.71595C7.02376 5.71595 2.71013 10.4616 1.50663 11.916C1.46774 11.963 1.46774 12.0313 1.50663 12.0783C2.71017 13.5328 7.02376 18.2784 12 18.2784C16.9762 18.2784 21.2898 13.5328 22.4933 12.0783C22.5635 11.9935 22.4887 11.916 22.4933 11.916C21.2898 10.4616 16.9762 5.71595 12 5.71595Z"
+                            fill="#A3AED0" />
+                        <path
+                            d="M12.0009 17.1698C9.14862 17.1698 6.82812 14.8493 6.82812 11.997C6.82812 9.14472 9.14862 6.82422 12.0009 6.82422C14.8532 6.82422 17.1737 9.14472 17.1737 11.997C17.1737 14.8493 14.8532 17.1698 12.0009 17.1698ZM12.0009 8.30215C9.96356 8.30215 8.30606 9.95966 8.30606 11.997C8.30606 14.0343 9.96356 15.6918 12.0009 15.6918C14.0382 15.6918 15.6957 14.0343 15.6957 11.997C15.6957 9.95966 14.0382 8.30215 12.0009 8.30215Z"
+                            fill="#A3AED0" />
+                    </svg> }
+                    @if(showPassword){
+
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <g clip-path="url(#clip0_38_1319)">
+                            <path
+                                d="M14.9796 12.2022L16.3427 10.839C16.4419 11.2101 16.5 11.598 16.5 12C16.5 14.4814 14.4814 16.5 12 16.5C11.598 16.5 11.2101 16.4419 10.839 16.3427L12.2021 14.9796C13.6926 14.878 14.8779 13.6926 14.9796 12.2022ZM23.9055 11.6357C23.8132 11.4698 22.5049 9.17723 19.9474 7.23436L18.8559 8.3258C20.7208 9.69698 21.9024 11.2962 22.3676 12.0012C21.4787 13.3547 17.9916 18 12 18C11.1015 18 10.266 17.8851 9.47981 17.7017L8.24738 18.9342C9.38044 19.2816 10.6258 19.5 12 19.5C19.8512 19.5 23.7437 12.6555 23.9055 12.3644C24.0315 12.1377 24.0315 11.8624 23.9055 11.6357ZM20.7803 4.2803L4.28025 20.7803C4.13381 20.9267 3.94181 21 3.75 21C3.55819 21 3.36619 20.9267 3.21975 20.7803C2.92669 20.4872 2.92669 20.0127 3.21975 19.7198L5.319 17.6205C1.92525 15.5717 0.200812 12.5558 0.0945 12.3644C-0.0315 12.1377 -0.0315 11.8622 0.0945 11.6355C0.256312 11.3445 4.14881 4.50005 12 4.50005C14.0301 4.50005 15.7884 4.96317 17.2916 5.64792L19.7197 3.2198C20.0128 2.92673 20.4874 2.92673 20.7803 3.2198C21.0731 3.51286 21.0733 3.98742 20.7803 4.2803ZM6.43744 16.5021L8.33625 14.6033C7.81181 13.8675 7.5 12.9704 7.5 12C7.5 9.51867 9.51863 7.50005 12 7.50005C12.9703 7.50005 13.8675 7.81186 14.6033 8.33611L16.1387 6.80067C14.9256 6.31486 13.5471 6.00005 12 6.00005C6.00844 6.00005 2.52131 10.6454 1.63256 11.9989C2.19694 12.8543 3.81919 15.0195 6.43744 16.5021ZM9.42506 13.5143L13.5142 9.42511C13.0682 9.16167 12.5546 9.00005 12 9.00005C10.3459 9.00005 9 10.3459 9 12C9 12.5547 9.16162 13.0682 9.42506 13.5143Z"
+                                fill="#A3AED0" />
+                        </g>
+                        <defs>
+                            <clipPath id="clip0_38_1319">
+                                <rect width="24" height="24" fill="white" />
+                            </clipPath>
+                        </defs>
+                    </svg> }
+                </button>
+                <!-- Password error messages -->
+                @if(password.errors && (password.dirty || password.touched)){
+                <div>
+                    @if(password.errors['required']){
+                    <span class="error_msg">
+                        {{'VALIDATION.REQUIRED' | translate}}
+                    </span>
+                    }
+                </div>
+                }
+
+            </div>
+            <div class="frogetPassword">
+                <h6 routerLink="/forget-password">{{'LOGIN.FORGOT_PASSWORD' | translate}}</h6>
+            </div>
+            <div class="d-flex  align-items-center justify-content-center text-center w-100">
+
+                <button class="main_btn w-100" (click)="login();" [disabled]="!validateForm()">
+                    {{'ACTION.LOGIN' | translate}}
+                </button>
+            </div>
+
+
+        </div>
+    </div>
+
+</div>

@@ -1,0 +1,95 @@
+
+@import "../../../../assets/scss/variables";
+
+.breadcrumb-container {
+  .breadcrumb-item {
+    cursor: pointer;
+    color: #424242;
+    
+    &.active {
+      font-weight: bold;
+    }
+
+  
+
+    &:focus {
+      border: 2px solid black;
+      border-radius: 4px;
+      -webkit-border-radius: 4px;
+      -moz-border-radius: 4px;
+      -ms-border-radius: 4px;
+      -o-border-radius: 4px;
+}
+
+
+    .breadcrumb-icon {
+      margin-right: 4px;
+    }
+  }
+
+  display: flex;
+  align-items: center;
+  white-space: nowrap;
+  width: fit-content;
+
+
+  a {
+    padding: 0 10px;
+    text-decoration: none;
+    color: $text-color;
+    transition: color 0.3s ease;
+    cursor: pointer;
+  }
+
+  .breadcrumb-divider {
+    color: $text-color;
+  }
+
+  .breadcrumb-overflow {
+    padding: 0 10px;
+    cursor: pointer;
+    color: $text-color;
+    display: flex;
+    align-items: center;
+    position: relative;
+  }
+}
+
+.dropdown {
+  position: absolute;
+  background-color: white;
+ 
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+  z-index: 10;
+  top: 100%;
+  left: 100%;
+
+  a {
+    display: block;
+    padding: 5px 10px;
+    color: $text-color;
+    text-decoration: none;
+    cursor: pointer;
+
+  
+  }
+
+  .mdc-list-item {
+    cursor: pointer !important;
+  }
+}
+
+.breadcrumb-small {
+  font-size: 12px;
+  padding: 0 5px;
+}
+
+.breadcrumb-medium {
+  font-size: 16px;
+  padding: 0 10px;
+}
+
+.breadcrumb-large {
+  font-size: 22px;
+  padding: 0 15px;
+}

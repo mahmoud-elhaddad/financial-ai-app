@@ -1,0 +1,41 @@
+
+.settings-container .form-group {
+  margin-bottom: 20px;
+}
+
+.settings-container label {
+  font-weight: 600;
+  margin-bottom: 6px;
+  display: block;
+}
+
+.settings-container .form-control {
+  border-radius: 8px;
+  padding: 10px;
+  border: 1px solid #ccc;
+  width: 100%;
+  font-size: 15px;
+}
+
+.settings-container small.text-muted {
+  display: block;
+  margin-top: 5px;
+  color: #6c757d;
+}
+
+.settings-container .text-danger {
+  font-size: 13px;
+}
+
+.settings-container .btn-primary {
+  background: #007bff;
+  border: none;
+  border-radius: 8px;
+  font-weight: 600;
+  transition: 0.2s;
+}
+
+.settings-container .btn-primary:disabled {
+  background: #ccc;
+  cursor: not-allowed;
+}

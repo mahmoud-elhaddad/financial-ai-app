@@ -1,0 +1,114 @@
+<div [ngClass]="{'moveSide': moveSideMenu,'expand':showSideMenu}" class="text-center app-sidebar d-flex flex-column ">
+
+    <img src="assets/images/logo.svg" alt="logo" class="w-100 logo" *ngIf="!showSideMenu">
+    <img src="assets/images/mine_logo.svg" alt="logo" class="w-100 logo" *ngIf="showSideMenu">
+    <div class="openSide" [ngClass]="{'rotaateIcon': showSideMenu}">
+        <img src="assets/images/side_menu_icon.svg" class="sideIcon" (click)="collapsSideMenu()"  >
+    </div>
+    <ul class="pt-24">
+        <li>
+            <a    [routerLink]="['/dashboard']" class="fs-16 fw-500 d-flex align-items-center  w-100 "
+                [ngClass]="{'moveSide': moveSideMenu}" routerLinkActive="active" >
+                <i class="fa-solid fa-chart-line " ></i>
+                <span *ngIf="!showSideMenu" class="icon">{{ "SIDEMENU.HOME" | translate}}</span>
+                
+            </a>
+        </li>
+            <li>
+            <a   [routerLink]="['/users-list']"  class="fs-16 fw-500 d-flex align-items-center  w-100 "
+                [ngClass]="{'moveSide': moveSideMenu}" routerLinkActive="active" >
+                <i class="fa-solid fa-users"></i>
+                <span *ngIf="!showSideMenu" class="icon">{{ "SIDEMENU.USERS_LIST" | translate}}</span>
+                
+            </a>
+        </li>
+      
+        <li >
+            <a   [routerLink]="['/categories']" class="fs-16 fw-500 d-flex align-items-center  w-100 "
+                [ngClass]="{'moveSide': moveSideMenu}" routerLinkActive="active" >
+               <i class="fa-solid fa-list"></i>
+                <span *ngIf="!showSideMenu" class="icon">{{ "SIDEMENU.CATEGORIES" | translate}}</span>
+                
+            </a>
+        </li>
+        <li *ngIf="!userData?.email?.includes('super')">
+            <a   [routerLink]="['/news']" class="fs-16 fw-500 d-flex align-items-center  w-100 "
+                [ngClass]="{'moveSide': moveSideMenu}" routerLinkActive="active" >
+               <i class="fa-solid fa-newspaper"></i>
+                <span *ngIf="!showSideMenu" class="icon">{{ "SIDEMENU.POSTS" | translate}}</span>
+                
+            </a>
+        </li>
+        <li *ngIf="userData?.email?.includes('super')">
+            <a   [routerLink]="['/news/super']" class="fs-16 fw-500 d-flex align-items-center  w-100 "
+                [ngClass]="{'moveSide': moveSideMenu}" routerLinkActive="active" >
+                <i class="fa-solid fa-newspaper"></i>
+                <span *ngIf="!showSideMenu" class="icon">{{ "SIDEMENU.POSTS" | translate}}</span>
+                
+            </a>
+        </li>
+      <li *ngIf="userData?.email?.includes('super')">
+            <a   [routerLink]="['/system-settings']" class="fs-16 fw-500 d-flex align-items-center  w-100 "
+                [ngClass]="{'moveSide': moveSideMenu}" routerLinkActive="active" >
+                <i class="fa-solid fa-sliders"></i>
+                <span *ngIf="!showSideMenu" class="icon">{{ "SIDEMENU.SYSTEM_SETTING" | translate}}</span>
+                
+            </a>
+        </li>
+        <!-- <mat-accordion>
+            <mat-expansion-panel hideToggle>
+                <mat-expansion-panel-header class="fs-16 fw-500 d-flex align-items-center  w-100 justify-content-between">
+                    {{ "SIDEMENU.SETTINGS" | translate}}
+                    <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path
+                            d="M4.14708 12.3542C3.95147 12.1593 3.9509 11.8427 4.14582 11.6471L9.6108 6.16258C9.82574 5.94686 10.1751 5.94687 10.39 6.16258L15.855 11.6471C16.0499 11.8427 16.0493 12.1593 15.8537 12.3542C15.6581 12.5491 15.3415 12.5485 15.1466 12.3529L10.0004 7.18833L4.85418 12.3529C4.65927 12.5485 4.34269 12.5491 4.14708 12.3542Z"
+                            fill="#242424" />
+                    </svg>
+
+                </mat-expansion-panel-header>
+                <ul>
+                    <li>
+                        <a class="fs-14 fw-500 d-flex align-items-center  w-100" routerLinkActive="active"
+                            routerLink="setting">
+                         {{ "SIDEMENU.SETTINGS" | translate}}
+                        </a>
+                    </li>
+                    <li>
+                        <a class="fs-14 fw-500 d-flex align-items-center  w-100" routerLinkActive="active"
+                            routerLink="setting">
+                       {{ "SIDEMENU.SETTINGS" | translate}}
+                        </a>
+                    </li>
+                    <li>
+                        <a class="fs-14 fw-500 d-flex align-items-center  w-100" routerLinkActive="active"
+                            routerLink="setting">
+                            {{ "SIDEMENU.SETTINGS" | translate}}
+                        </a>
+                    </li>
+                </ul>
+            </mat-expansion-panel>
+        </mat-accordion> -->
+    </ul>
+    <button class="btn btn-danger logout_btn mt-auto" (click)="openLogOut()">
+  {{ "SIDEMENU.LOGOUT" | translate }}
+    </button>
+</div>
+
+
+<ng-template #logOut let-modal>
+    <div class="modal-body text-center p-32">
+     
+
+        <h3 class="fs-20 fw-bold dark_color mb_32 mt_32">
+            {{ "SIDEMENU.LOGOUT_TXT" | translate}}
+        </h3>
+        <div class="w-100 d-flex justify-content-center align-items-center mt_32">
+            <button class="main_btn main_btn--warn me-4" (click)="logout();modal.dismiss('Cross click')">
+                {{ "ACTION.ACCEPT" | translate}}
+            </button>
+            <button class="border-0 bg-transparent fs-18 fw-500 ms_24" (click)="modal.dismiss('Cross click')">
+                {{ "ACTION.CLOSE" | translate}}
+            </button>
+        </div>
+    </div>
+</ng-template>

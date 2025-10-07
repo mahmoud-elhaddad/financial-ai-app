@@ -1,0 +1,6 @@
+<app-header (toggleSideMenu)="sidebar.toggleSideMenu($event)" [isSideMenuVisible]="isSideMenuVisible"></app-header>
+<app-sidebar #sidebar (changeView)="handleSideMenuChange($event)"></app-sidebar>
+
+<div class="layout-content" [ngClass]="{ 'with-sidebar': isSideMenuVisible }">
+  <router-outlet></router-outlet> <!-- children like dashboard, reports, etc. -->
+</div>

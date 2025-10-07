@@ -1,0 +1,73 @@
+@import '../../../../../assets/scss/variables';
+@import '../../../../../assets/scss/_mixins.scss';
+
+.header_content {
+    color: $dark_color;
+    padding: 12px 40px;
+
+    @include mediaquery(max, desktop) {
+        padding: 12px;
+    }
+}
+
+.lang_link {
+    
+
+    @include mediaquery(max, mobile) {
+        span {
+            display: none
+        }
+    }
+}
+
+.user {
+    img {
+        @include border_radius(50%);
+        margin-inline-end: 12px;
+        width: 48px;
+        height: 48px;
+        border: 3px solid $main_color;
+    }
+
+    span {
+        color: $link_color;
+    }
+
+    @include mediaquery(max, tablet) {
+        img{
+            margin: 0;
+        }
+        
+    }
+}
+
+.flag {
+    @include border_radius(4px);
+    width: 24px;
+}
+
+.btn_icon {
+    display: none;
+
+    @include mediaquery (max, l_desktop) {
+        display: inline-block;
+    }
+    @include mediaquery(max, mobile) {
+        margin-inline-start: 8px !important;
+    }
+}
+
+.mobile_view {
+    img {
+        display: none;
+
+        @include mediaquery(max, l_desktop) {
+            display: block;
+        }
+
+        @include mediaquery(max, mobile) {
+            width: 100px;
+        }
+    }
+}
+

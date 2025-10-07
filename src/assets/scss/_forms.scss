@@ -1,0 +1,92 @@
+@import "./variables";
+@import "./mixins";
+
+// Forms
+.form-group {
+    margin-bottom: 1.5rem;
+    position: relative;
+}
+
+label {
+    margin: 0 0 0.5rem;
+    font-size: 0.875rem;
+    display: block !important;
+    font-family: $main_font;
+    color: $main_color;
+    font-weight: 400;
+    line-height: 1.25rem;
+    text-align: start;
+
+    sup {
+        color: $main_color;
+        font-size: 0.875rem;
+    }
+}
+
+.form-control {
+    background-color: $white_color;
+    border: 1px solid $border_color !important;
+    outline: none !important;
+    padding: 0 1.5rem;
+    line-height: 3.375rem;
+    height: 3.375rem;
+    font-size: 1rem;
+    color: $dark_color;
+    text-align: start;
+    @include border_radius($border_radius);
+    @include box_no_shadow;
+
+    &.is-invalid {
+        border-color: $warn_color !important;
+        background-image: none;
+    }
+
+    &:read-only {
+        border: 1px solid #CED4DA;
+        background-color: #f8f8f8;
+    }
+}
+
+textarea {
+    resize: none;
+    min-height: 5.625rem !important;
+}
+
+input::-webkit-input-placeholder {
+    font-size: 0.875rem;
+    color: #A3AED0;
+    font-weight: 400;
+}
+
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+input[type=number] {
+    appearance: textfield;
+    -moz-appearance: textfield;
+}
+
+.form-control[type=file] {
+    padding: 0 0.625rem;
+}
+
+.error_msg {
+    font-size: 0.75rem;
+    color: $warn_color;
+    text-transform: capitalize;
+    margin-top: 0.25rem;
+    display: block;
+}
+
+.succ_msg {
+    font-size: 0.75rem;
+    color: $green_color;
+    text-transform: capitalize;
+    margin-top: 0.25rem;
+    display: block;
+    text-decoration: line-through;
+
+}

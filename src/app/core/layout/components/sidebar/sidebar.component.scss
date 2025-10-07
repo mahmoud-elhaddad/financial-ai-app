@@ -1,0 +1,134 @@
+@import '../../../../../assets/scss/_variables.scss';
+@import '../../../../../assets/scss/_mixins.scss';
+
+.logo {
+    height: 56px;
+    margin: 0 auto 32px;
+
+}
+
+ul {
+    position: relative;
+
+    h3 {
+        margin: 18px 0;
+        text-align: start;
+    }
+
+    li {
+        display: block;
+        margin-bottom: 16px;
+    }
+
+    a {
+        padding: 16px;
+        position: relative;
+        color: $dark_color;
+        line-height: 18px;
+        text-decoration: none;
+        text-align: start;
+        text-transform: capitalize;
+        letter-spacing: 0;
+
+        &.disabled {
+            opacity: 50%;
+        }
+
+        svg {
+            vertical-align: middle;
+            margin-inline-end: 16px;
+        }
+
+        &:hover,
+        &.active {
+            color: $white_color;
+            background-color: $main_color;
+            @include border_radius($border_radius);
+
+         
+
+            svg {
+                path {
+                    fill: $white_color;
+                }
+            }
+        }
+
+    }
+}
+
+.sideToggle {
+    position: absolute;
+    inset-inline-end: -60px;
+    top: 0;
+    z-index: 9999;
+    @include border_radius(0);
+    height: 82px;
+    width: 60px;
+    display: none;
+
+    @include mediaquery(max, desktop) {
+        display: block;
+    }
+}
+
+.mat-expansion-panel {
+    @include box_no_shadow;
+}
+
+.mat-expansion-panel-header {
+    padding: 16px !important;
+    line-height: 24px !important;
+    line-height: 16px !important;
+    color: $dark_color !important;
+}
+
+::ng-deep {
+    .mat-content.mat-content-hide-toggle {
+        text-align: start !important;
+        margin: 0 !important;
+        display: flex !important;
+        align-items: center !important;
+        justify-content: space-between;
+    }
+
+    .mat-expansion-panel-body {
+        padding: 0 !important;
+        li{
+            margin: 0 !important;
+            a{
+                padding: 8px 16px !important;
+                font-size: 14px;
+            }
+        }
+    }
+    .mat-expansion-panel-header.mat-expanded svg{
+        transform: rotate(180deg);
+    }
+}
+.openSide{
+    display: flex;
+    align-items: center;
+    justify-content: end;
+   
+}
+ .rotaateIcon{
+    justify-content: center;
+    .sideIcon{
+  transform: rotate(180deg);
+    }
+      
+    }
+.expand{
+    width: 100px;
+    padding: 0.5rem;
+}
+.sideIcon{
+    margin-bottom: 20px;
+}
+.icon{
+    margin: 0 10px;
+}
+.logout_btn{
+    
+}

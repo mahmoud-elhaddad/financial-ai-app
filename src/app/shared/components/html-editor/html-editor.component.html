@@ -1,0 +1,105 @@
+<div class="html-editor-wrapper" 
+     [class.focused]="isFocused" 
+     [class.invalid]="!isValid && required"
+     [class.rtl]="isRTL"
+     [attr.dir]="isRTL ? 'rtl' : 'ltr'">
+  <div class="html-editor-container">
+    <!-- Editor Element -->
+    <div 
+      #editorElement 
+      class="html-editor"
+      [class.disabled]="isDisabled"
+      [class.readonly]="readOnly"
+      [attr.dir]="isRTL ? 'rtl' : 'ltr'">
+    </div>
+  </div>
+
+  <!-- Footer with counts and validation -->
+  <div class="html-editor-footer" 
+       [attr.dir]="isRTL ? 'rtl' : 'ltr'"
+       *ngIf="showFooter">
+    
+    <!-- Counts Container -->
+    <div class="counts-container">
+      <!-- Word Count -->
+      <span 
+        *ngIf="showWordCount" 
+        class="count-item"
+        [class.warning]="wordCountWarning"
+        [class.error]="isWordCountExceeded">
+        <i class="fas fa-font" [class.rtl-icon]="isRTL"></i>
+        {{ 'HTML_EDITOR.WORD_COUNT' | translate }}: {{ wordCount }}
+        <span *ngIf="maxWords">/{{ maxWords }}</span>
+      </span>
+
+      <!-- Character Count -->
+      <span 
+        *ngIf="showCharCount" 
+        class="count-item"
+        [class.warning]="charCountWarning"
+        [class.error]="isCharCountExceeded">
+        <i class="fas fa-keyboard" [class.rtl-icon]="isRTL"></i>
+        {{ 'HTML_EDITOR.CHAR_COUNT' | translate }}: {{ charCount }}
+        <span *ngIf="maxChars">/{{ maxChars }}</span>
+      </span>
+
+      <!-- Image Count -->
+      <span 
+        *ngIf="showImageCount" 
+        class="count-item"
+        [class.warning]="imageCountWarning"
+        [class.error]="imageCountExceeded">
+        <i class="fas fa-image" [class.rtl-icon]="isRTL"></i>
+        {{ 'HTML_EDITOR.IMAGE_COUNT' | translate }}: {{ imageCount }}
+        <span *ngIf="mergedImageConfig.maxImageCount">/{{ mergedImageConfig.maxImageCount }}</span>
+      </span>
+    </div>
+
+    <!-- Image Validation Settings Info -->
+    <div class="image-settings-info" *ngIf="enableImageValidation && mergedImageConfig">
+      <div class="settings-row">
+        <span class="setting-item" *ngIf="mergedImageConfig.maxFileSize">
+          <i class="fas fa-weight-hanging"></i>
+          {{ 'HTML_EDITOR.MAX_FILE_SIZE' | translate }}: {{ formatFileSize(mergedImageConfig.maxFileSize) }}
+        </span>
+        
+        <span class="setting-item" *ngIf="mergedImageConfig.allowedTypes">
+          <i class="fas fa-file-image"></i>
+          {{ 'HTML_EDITOR.ALLOWED_TYPES' | translate }}: {{ mergedImageConfig.allowedTypes.join(', ') }}
+        </span>
+        
+        <span class="setting-item" *ngIf="mergedImageConfig.maxWidth || mergedImageConfig.maxHeight">
+          <i class="fas fa-expand-arrows-alt"></i>
+          {{ 'HTML_EDITOR.MAX_DIMENSIONS' | translate }}: 
+          {{ mergedImageConfig.maxWidth || '∞' }}x{{ mergedImageConfig.maxHeight || '∞' }}px
+        </span>
+      </div>
+    </div>
+
+
+    <!-- Content Validation Messages -->
+    <div class="validation-messages" *ngIf="!isValid">
+      <span 
+        *ngIf="isContentRequired" 
+        class="validation-message">
+        <i class="fas fa-exclamation-circle"></i>
+        {{ 'HTML_EDITOR.CONTENT_REQUIRED' | translate }}
+      </span>
+      <span 
+        *ngIf="isWordCountExceeded" 
+        class="validation-message">
+        <i class="fas fa-exclamation-circle"></i>
+        {{ 'HTML_EDITOR.MAX_WORDS_EXCEEDED' | translate: {max: maxWords, current: wordCount} }}
+      </span>
+      <span 
+        *ngIf="isCharCountExceeded" 
+        class="validation-message">
+        <i class="fas fa-exclamation-circle"></i>
+        {{ 'HTML_EDITOR.MAX_CHARS_EXCEEDED' | translate: {max: maxChars, current: charCount} }}
+      </span>
+    </div>
+
+    <!-- Image Validation Messages -->
+   
+  </div>
+</div>

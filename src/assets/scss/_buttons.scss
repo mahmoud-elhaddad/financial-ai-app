@@ -1,0 +1,112 @@
+@import "./variables";
+@import "./mixins";
+
+.main_btn {
+    position: relative;
+    overflow: hidden;
+    border: 0;
+    color: $white_color;
+    background-color: $main_color;
+    font-weight: 600;
+    font-size: 0.875rem;
+    padding: 0.5rem 1rem;
+     border-radius: 6px;
+    margin: 10px;
+    text-align: center;
+    text-transform: capitalize;
+    min-width: 5.875rem;
+      transition: background-color 0.2s ease;
+    @include border_radius($border_radius);
+
+    svg {
+        margin-inline-end: 0.25rem;
+
+        path {
+            fill: $white_color;
+        }
+    }
+
+
+    &--gray {
+        background-color: $white_color;
+        border: 1px solid $border_color;
+        color: $second_color;
+
+        svg path {
+            fill: $second_color;
+        }
+
+        &:hover {
+            background-color: $border_color;
+            color: $second_color !important;
+        }
+    }
+
+    &--light {
+        background: $white_color;
+        border: 0;
+        color: $main_color;
+
+        svg path {
+            fill: $main_color;
+        }
+
+        &:hover {
+            background-color: $white_color;
+            color: $dark_color !important;
+          
+        }
+    }
+
+    &:hover{
+          border: 1px solid $main_color;
+           background-color: $white_color;
+            color: $main_color ;
+    }
+    &:disabled {
+        cursor: not-allowed;
+        opacity: 40%;
+    }
+
+
+
+
+}
+
+.btn_icon {
+    position: relative;
+    overflow: hidden;
+    border: 0;
+    background-color: $main_color;
+    color: $white_color;
+    width: 2.5rem;
+    height: 2.5rem;
+    padding: 0.25rem;
+    @include border_radius($border_radius);
+    text-align: center;
+    @include transition(0.4s all linear);
+
+    &:hover {
+        color: $main_color;
+
+    }
+}
+
+.btn-cancel {
+  background-color: $warn_color;
+  color: #fff;
+  border: none;
+  padding: 0.5rem 1rem;
+  border-radius: 6px;
+  font-weight: 500;
+  transition: background-color 0.2s ease;
+margin: 10px;
+  &:hover {
+    background-color: darken($warn_color, 10%);
+  }
+
+  &:focus {
+    outline: none;
+    box-shadow: 0 0 0 2px rgba($warn_color, 0.3);
+  }
+}

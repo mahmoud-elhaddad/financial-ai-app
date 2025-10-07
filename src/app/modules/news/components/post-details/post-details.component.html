@@ -1,0 +1,45 @@
+<div class="settings-container">
+    <div class="row">
+        <div class="col-12">
+            <app-breadcrumbs (onClickEvent)="onBreadcrumbClicked($event)" [breadcrumbs]="breadcrumbItems" [size]="breadcrumbSizeEnum.Medium"  divider=">"></app-breadcrumbs>
+        </div>
+        <div class="col-12">
+            <h2 class="main_head section-title">{{ 'NEWS.DETAILS' | translate }}</h2>
+        </div>
+    </div>
+
+    <div class="row userDetails">
+        <div class="col-md-6 mt-4">
+            <h4 class="title">{{ 'NEWS.TITLE' | translate }}</h4>
+            <h5 class="value"> {{postDetails?.title}}</h5>
+        </div>
+        <div class="col-md-6 mt-4">
+            <h4 class="title">{{ 'SUBSCRIPTIONS.STATUS' | translate }}</h4>
+            <h5 class="value"> {{postDetails?.status}} </h5>
+        </div>
+        <div class="col-md-6 mt-4">
+            <h4 class="title">{{ 'POST.CATEGORY' | translate }}</h4>
+            <h5 class="value">  {{ currentLang === 'ar' ? postDetails?.categoryArName : postDetails?.categoryEnName }} </h5>
+        </div>
+        <div class="col-md-6 mt-4">
+            <h4 class="title">{{ 'NEWS.CERATED_AT' | translate }}</h4>
+            <h5 class="value"> {{postDetails?.createdAt | date: 'longDate'}} </h5>
+        </div>
+        <div class="col-md-12 mt-4">
+            <h4 class="title">{{ 'POST.COVER_IMAGE' | translate }}</h4>
+            <img [src]="postDetails?.coverImage" class="w-auto h-auto">
+            
+        </div>
+        <div class="col-md-12 mt-4">
+            <h4 class="title">{{ 'POST.CONTENT' | translate }}</h4>
+            <div class="content" [innerHTML]="postDetails?.content"></div>
+            
+        </div>
+        
+        <div class="col-12 mt-4 text-start">
+            <button class="main_btn" (click)="backPage()">{{ 'NEWS.BACK' | translate }}</button>
+        </div>
+    </div>
+
+    
+</div>
